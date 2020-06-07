@@ -13,6 +13,11 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { ContactComponent } from './contact/contact.component';
+import { AProposComponent } from './a-propos/a-propos.component';
+import { ProfilComponent } from './profil/profil.component';
+import { TendancesComponent } from './tendances/tendances.component';
+import { BoutiquesComponent } from './boutiques/boutiques.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +26,12 @@ import { SignupComponent } from './signup/signup.component';
         HomeComponent,
         FooterComponent,
         SigninComponent,
-        SignupComponent
+        SignupComponent,
+        ContactComponent,
+        AProposComponent,
+        ProfilComponent,
+        TendancesComponent,
+        BoutiquesComponent
     ],
     imports: [
         BrowserAnimationsModule,
