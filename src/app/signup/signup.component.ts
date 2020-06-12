@@ -7,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
   data: Date = new Date();
+  loginFocus;
+  nomFocus;
+  prenomFocus;
+  emailFocus;
+  phoneFocus;
+  pwd1Focus;
+  pwd2Focus;
+  imgFocus;
   focus;
   focus1;
   focus2;
