@@ -9,15 +9,15 @@ import { ExamplesModule } from './examples/examples.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { SigninComponent } from './signin/signin.component';
-import { SignupComponent } from './signup/signup.component';
-import { ContactComponent } from './contact/contact.component';
-import { AProposComponent } from './a-propos/a-propos.component';
-import { ProfilComponent } from './profil/profil.component';
-import { TendancesComponent } from './tendances/tendances.component';
-import { BoutiquesComponent } from './boutiques/boutiques.component';
+import { SigninComponent } from './components/signin/signin.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { AProposComponent } from './components/a-propos/a-propos.component';
+import { ProfilComponent } from './components/profil/profil.component';
+import { TendancesComponent } from './components/tendances/tendances.component';
+import { BoutiquesComponent } from './components/boutiques/boutiques.component';
 
 @NgModule({
     declarations: [

@@ -8,14 +8,14 @@ import { LandingComponent } from './examples/landing/landing.component';
 import { LoginComponent } from './examples/login/login.component';
 import { ProfileComponent } from './examples/profile/profile.component';
 import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.component';
-import {HomeComponent} from './home/home.component';
-import {SigninComponent} from './signin/signin.component';
-import {SignupComponent} from './signup/signup.component';
-import {AProposComponent} from './a-propos/a-propos.component';
-import {BoutiquesComponent} from './boutiques/boutiques.component';
-import {ContactComponent} from './contact/contact.component';
-import {TendancesComponent} from './tendances/tendances.component';
-import {ProfilComponent} from './profil/profil.component';
+import {HomeComponent} from './components/home/home.component';
+import {SigninComponent} from './components/signin/signin.component';
+import {SignupComponent} from './components/signup/signup.component';
+import {AProposComponent} from './components/a-propos/a-propos.component';
+import {BoutiquesComponent} from './components/boutiques/boutiques.component';
+import {ContactComponent} from './components/contact/contact.component';
+import {TendancesComponent} from './components/tendances/tendances.component';
+import {ProfilComponent} from './components/profil/profil.component';
 
 const routes: Routes =[
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -29,7 +29,7 @@ const routes: Routes =[
     { path: 'signup', component: SignupComponent},
     { path: 'a-propos', component: AProposComponent},
     { path: 'boutiques', component: BoutiquesComponent },
-    { path: 'contact', component: ContactComponent },
+    { path: 'contacts', component: ContactComponent },
     { path: 'tendances', component: TendancesComponent },
     { path: 'profil', component: ProfilComponent }
 ];

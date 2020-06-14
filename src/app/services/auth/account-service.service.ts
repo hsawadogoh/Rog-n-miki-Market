@@ -1,0 +1,88 @@
+import { Injectable } from '@angular/core';
+import {Observable, of, ReplaySubject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {StateStorageService} from './state-storage.service';
+import {Router} from '@angular/router';
+import {SERVER_API_URL} from '../../constants/constant';
+import {Account} from '../../model/account.model';
+import {catchError, shareReplay, tap} from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AccountService {
+  private userIdentity: Account | null = null;
+  private authenticationState = new ReplaySubject<Account | null>(1);
+  private accountCache$?: Observable<Account | null>;
+
+  constructor(private http: HttpClient, private stateStorageService: StateStorageService, private router: Router) {}
+
+  save(account: Account): Observable<{}> {
+    return this.http.post(SERVER_API_URL + 'api/account', account);
+  }
+
+  authenticate(identity: Account | null): void {
+    this.userIdentity = identity;
+    this.authenticationState.next(this.userIdentity);
+  }
+
+  hasAnyAuthority(authorities: string[] | string): boolean {
+    if (!this.userIdentity || !this.userIdentity.authorities) {
+      return false;
+    }
+    if (!Array.isArray(authorities)) {
+      authorities = [authorities];
+    }
+    return this.userIdentity.authorities.some((authority: string) => authorities.includes(authority));
+  }
+
+  identity(force?: boolean): Observable<Account> {
+    if (!this.accountCache$ || force || !this.isAuthenticated()) {
+      this.accountCache$ = this.fetch().pipe(
+          catchError(() => {
+            return of(null);
+          }),
+          tap((account: Account | null) => {
+            this.authenticate(account);
+
+            if (account) {
+              this.navigateToStoredUrl();
+            }
+          }),
+          shareReplay()
+      );
+    }
+    // @ts-ignore
+    return this.accountCache$;
+  }
+
+  isAuthenticated(): boolean {
+    return this.userIdentity !== null;
+  }
+
+  getAuthenticationState(): Observable<Account | null> {
+    return this.authenticationState.asObservable();
+  }
+
+  getImageUrl(): string | undefined {
+    if (this.userIdentity) {
+      return this.userIdentity.imageUrl;
+    } else {
+      return '';
+    }
+  }
+
+  private fetch(): Observable<Account> {
+    return this.http.get<Account>(SERVER_API_URL + 'api/account');
+  }
+
+  private navigateToStoredUrl(): void {
+    // previousState can be set in the authExpiredInterceptor and in the userRouteAccessService
+    // if login is successful, go to stored previousState and clear previousState
+    const previousUrl = this.stateStorageService.getUrl();
+    if (previousUrl) {
+      this.stateStorageService.clearUrl();
+      this.router.navigateByUrl(previousUrl);
+    }
+  }
+}
