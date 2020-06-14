@@ -18,6 +18,8 @@ import { AProposComponent } from './components/a-propos/a-propos.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { TendancesComponent } from './components/tendances/tendances.component';
 import { BoutiquesComponent } from './components/boutiques/boutiques.component';
+import {HttpClientModule} from '@angular/common/http';
+import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 
 @NgModule({
     declarations: [
@@ -37,12 +39,13 @@ import { BoutiquesComponent } from './components/boutiques/boutiques.component';
         BrowserAnimationsModule,
         NgbModule,
         FormsModule,
+        HttpClientModule,
         RouterModule,
         AppRoutingModule,
         ComponentsModule,
         ExamplesModule
     ],
-    providers: [],
+    providers: [SessionStorageService, LocalStorageService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
